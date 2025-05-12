@@ -10,7 +10,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { useState } from "react";
 
 function AppWrapper() {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("auth_token"));
+  const [, setIsLoggedIn] = useState(!!localStorage.getItem("auth_token"));
   const location = useLocation();
   const showNavbar = location.pathname !== "/login" && localStorage.getItem("auth_token");
 
