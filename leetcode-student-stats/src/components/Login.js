@@ -14,7 +14,7 @@ const Login = ({ onLogin }) => {
     console.log("🔐 Login button clicked");
 
     try {
-      const res = await axios.post("http://localhost:3000/auth/login", {
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/login`, {
         username,
         password,
       });

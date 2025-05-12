@@ -1,7 +1,8 @@
 // src/api/apiService.js
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = process.env.REACT_APP_BACKEND_URL;
+
 // Update with your backend URL if different
 
 // Fetch all students
