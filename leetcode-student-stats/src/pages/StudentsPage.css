@@ -1,0 +1,183 @@
+
+
+.student-heading {
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #0a2f5c;
+  background: linear-gradient(to right, #e0f7fa, #e3f2fd);
+  padding: 12px 24px;
+  border-left: 6px solid #1976d2;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+
+.students-container {
+  padding: 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #f8fbff, #e6f0ff);
+  min-height: 100vh;
+  border-radius: 10px;
+}
+
+/* Filter controls */
+.filters {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filters label {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filters select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 14px;
+}
+
+/* Table Styles */
+.students-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  font-size: 14px;
+}
+
+.students-table th,
+.students-table td {
+  padding: 12px;
+  text-align: center;
+}
+
+.students-table th {
+  background-color: #003366;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.students-table tbody tr:nth-child(even) {
+  background-color: #f2f8ff;
+}
+
+.students-table tbody tr:hover {
+  background-color: #e0f7fa;
+  transition: background-color 0.2s;
+}
+
+/* Colored columns */
+td[style*="background-color: #d4edda"] {
+  background-color: #d4edda !important;
+  font-weight: bold;
+}
+td[style*="background-color: #fff3cd"] {
+  background-color: #fff3cd !important;
+  font-weight: bold;
+}
+td[style*="background-color: #f8d7da"] {
+  background-color: #f8d7da !important;
+  font-weight: bold;
+}
+
+/* Clickable name */
+.clickable {
+  color: #0066cc;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+/* Modal styles */
+.modal {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 550px;
+  width: 100%;
+  margin: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.65);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.btn-close {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  float: right;
+  margin-top: 20px;
+}
+
+.btn-close:hover {
+  background-color: #b02a37;
+}
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination button {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.pagination button:hover {
+  background-color: #dcdcdc;
+  transform: scale(1.05);
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}

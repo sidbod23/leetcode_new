@@ -96,3 +96,24 @@ export const fetchTopThisWeek = async () => {
     throw error;
   }
 };
+
+// Fetch progress details for a single user by ID
+export const fetchUserProgress = async (userId) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/users/${userId}/progress`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user progress:", error);
+    throw error;
+  }
+};
+
+export const fetchDifficultyBreakdown = async () => {
+  try {
+    const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/difficulty-breakdown`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching difficulty breakdown:", error);
+    throw error;
+  }
+};

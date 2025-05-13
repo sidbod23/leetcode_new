@@ -28,10 +28,6 @@ const TopPerformers = () => {
   return (
     <div className="container">
       <h2 className="heading">🏆 Top Performers</h2>
-      <p className="summary">
-        Total Students: {students.length} | Filters Applied: {sortBy.toUpperCase()},{" "}
-        {year || "All"}, {division || "All"}
-      </p>
 
       {/* Filters */}
       <div className="filters">

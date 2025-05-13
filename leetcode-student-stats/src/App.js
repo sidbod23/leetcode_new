@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-route
 import Dashboard from "./pages/Dashboard";
 import StudentTablePage from "./pages/StudentTablePage";
 import TopPerformers from "./pages/TopPerformers";
-import InactiveUsers from "./pages/InactiveUsers";
 import ExportPage from "./pages/ExportPage";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
@@ -22,7 +21,6 @@ function AppWrapper() {
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/students" element={<PrivateRoute><StudentTablePage /></PrivateRoute>} />
         <Route path="/top-performers" element={<PrivateRoute><TopPerformers /></PrivateRoute>} />
-        <Route path="/inactive-users" element={<PrivateRoute><InactiveUsers /></PrivateRoute>} />
         <Route path="/export" element={<PrivateRoute><ExportPage /></PrivateRoute>} />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>

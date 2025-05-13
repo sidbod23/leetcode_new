@@ -8,7 +8,8 @@ import {
   fetchClassTotals,
   fetchWeeklyStats,
   fetchClassDistribution,
-  fetchTopThisWeek
+  fetchTopThisWeek,
+  fetchDifficultyBreakdown
 } from "../api/apiService";
 
 import "./Dashboard.css";
@@ -19,6 +20,8 @@ const Dashboard = () => {
   const [classTotals, setClassTotals] = useState([]);
   const [weeklyProgress, setWeeklyProgress] = useState([]);
   const [classDistribution, setClassDistribution] = useState([]);
+  const [difficultyData, setDifficultyData] = useState([]);
+
 
 
   useEffect(() => {
@@ -27,10 +30,14 @@ const Dashboard = () => {
         const totals = await fetchClassTotals();
         const weekly = await fetchWeeklyStats();
         const distribution = await fetchClassDistribution();
+        const difficulty = await fetchDifficultyBreakdown();
+
+
 
         setClassTotals(totals);
         setWeeklyProgress(weekly);
         setClassDistribution(distribution);
+        setDifficultyData(difficulty);
       } catch (error) {
         console.error("Error loading dashboard data:", error);
       }
@@ -43,6 +50,23 @@ const Dashboard = () => {
     <div className="dashboard-container">
       <h2>📊 Dashboard Overview</h2>
 
+      <div className="chart-box">
+  <h3>Difficulty Breakdown by Class</h3>
+  <ResponsiveContainer width="100%" height={300}>
+    <BarChart data={difficultyData}>
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="class" />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      <Bar dataKey="easy" stackId="a" fill="#a0e7a0" barSize={200} />
+    <Bar dataKey="medium" stackId="a" fill="#ffe29a" barSize={200} />
+    <Bar dataKey="hard" stackId="a" fill="#ff9e9e" barSize={200} />
+    </BarChart>
+  </ResponsiveContainer>
+</div>
+
+
       {/* Bar Chart */}
       <div className="chart-box">
         <h3>Total Solved by Class</h3>
@@ -53,7 +77,7 @@ const Dashboard = () => {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="total" fill="#8884d8" />
+            <Bar dataKey="total" fill="#8884d8" barSize={200}/>
           </BarChart>
         </ResponsiveContainer>
       </div>

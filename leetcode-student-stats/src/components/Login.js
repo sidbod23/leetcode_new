@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import "./Login.css";
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -20,8 +23,8 @@ const Login = ({ onLogin }) => {
       });
 
       localStorage.setItem("auth_token", res.data.token);
-      onLogin();                    // ✅ update App.js state
-      navigate("/dashboard");       // ✅ redirect
+      onLogin();
+      navigate("/students");
     } catch (err) {
       console.error("❌ Login failed:", err.response?.data || err.message);
       setError("Invalid username or password");
@@ -29,14 +32,37 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", flexDirection: "column" }}>
-      <h1>Login</h1>
-      <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", width: "300px" }}>
-        <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        <button type="submit">Login</button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-      </form>
+    <div className="login-container">
+      <div className="login-card">
+        <h2>Login to Your Dashboard</h2>
+        <form onSubmit={handleLogin} className="login-form">
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <div className="password-wrapper">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <span
+              className="toggle-visibility"
+              onClick={() => setShowPassword((prev) => !prev)}
+              title={showPassword ? "Hide Password" : "Show Password"}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
+          <button type="submit">Login</button>
+          {error && <p className="error-msg">{error}</p>}
+        </form>
+      </div>
     </div>
   );
 };

@@ -11,7 +11,7 @@ const cron = require('node-cron');
 const authenticate = require('./middleware/authMiddleware');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 // Allow all origins
 app.use(cors({
@@ -34,26 +34,26 @@ app.get('/', (req, res) => {
 });
 
 // Export Data route
-app.get('/export',authenticate, async (req, res) => {
+app.get('/export', async (req, res) => {
   try {
-    console.log('Export request received...');
-    
-    // Call the function to export data
-    await exportDataToExcel();
+    const workbook = await exportDataToExcel();
 
-    // Send the file for download
-    res.download('users_data.xlsx', 'users_data.xlsx', (err) => {
-      if (err) {
-        console.error('Error sending file for download:', err);
-        return res.status(500).send('Error exporting data.');
-      }
-      console.log('File sent for download');
-    });
+    if (!workbook) {
+      return res.status(404).send('No users found.');
+    }
+
+    const fileName = `LeetCode_Export_${new Date().toISOString().split('T')[0]}.xlsx`;
+    res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+
+    await workbook.xlsx.write(res);
+    res.end();
   } catch (error) {
     console.error('Error during export:', error);
     res.status(500).send('Error exporting data.');
   }
 });
+
 
 // Update LeetCode stats for all users
 app.get('/update', async (req, res) => {

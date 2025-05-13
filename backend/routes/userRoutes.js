@@ -185,6 +185,49 @@ router.get('/class-distribution', async (req, res) => {
 });
 
 
+router.get('/difficulty-breakdown', async (req, res) => {
+  try {
+    const result = await User.aggregate([
+      {
+        $group: {
+          _id: "$class",
+          easy: { $sum: "$easySolved" },
+          medium: { $sum: "$mediumSolved" },
+          hard: { $sum: "$hardSolved" }
+        }
+      },
+      {
+        $project: {
+          class: "$_id",
+          easy: 1,
+          medium: 1,
+          hard: 1,
+          _id: 0
+        }
+      },
+      { $sort: { class: 1 } }
+    ]);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+// GET /users/:id/progress → returns progress details for a student
+router.get('/:id/progress', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select("name rollNo class div totalSolved thisWeek lastWeek lastToLastWeek");
+    if (!user) return res.status(404).json({ error: "User not found" });
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
+
 
 
 module.exports = router;
