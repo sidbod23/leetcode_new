@@ -8,7 +8,6 @@ import {
   fetchClassTotals,
   fetchWeeklyStats,
   fetchClassDistribution,
-  fetchTopThisWeek,
   fetchDifficultyBreakdown
 } from "../api/apiService";
 
