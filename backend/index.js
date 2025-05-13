@@ -15,7 +15,9 @@ const PORT = process.env.PORT || 5000;
 
 // Allow all origins
 app.use(cors({
-  origin: 'https://pictleetcode.netlify.app', // ✅ replace with your Netlify domain
+  origin: ['https://pictleetcode.netlify.app',
+    'http://localhost:3000'
+  ], // ✅ replace with your Netlify domain
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true, // optional, but safe to include if needed

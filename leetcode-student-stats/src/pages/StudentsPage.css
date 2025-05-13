@@ -117,12 +117,15 @@ td[style*="background-color: #f8d7da"] {
   background: #ffffff;
   padding: 20px;
   border-radius: 12px;
-  max-width: 550px;
+  max-width: 50%;
+  max-height: 90vh;         /* ✅ Limit height to viewport */
   width: 100%;
+  overflow-y: auto;         /* ✅ Enable vertical scroll */
   margin: auto;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   position: relative;
 }
+
 
 .modal-overlay {
   background-color: rgba(0, 0, 0, 0.65);
