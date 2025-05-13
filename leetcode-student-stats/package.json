@@ -7,11 +7,13 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "axios": "^1.7.9",
+    "canvas-confetti": "^1.9.3",
     "cra-template": "1.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.6.0",
     "react-scripts": "5.0.1",
+    "recharts": "^2.15.3",
     "web-vitals": "^4.2.4",
     "xlsx": "^0.18.5"
   },

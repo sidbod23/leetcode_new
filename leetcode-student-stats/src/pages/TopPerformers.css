@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(to right, #f8fbff, #e4f0ff);
+}
+
+.container {
+  padding: 30px 20px;
+}
+
+.heading {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+}
+
+.summary {
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #555;
+  font-weight: 500;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.filters label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.filters select {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.podium {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.podium-box {
+  width: 180px;
+  border-radius: 15px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-top: 40px;
+}
+
+.medal-floating {
+  position: absolute;
+  top: -20px;
+  font-size: 36px;
+  z-index: 5;
+}
+
+.podium-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+}
+
+.podium-box strong {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.podium-box div {
+  line-height: 1.3;
+  font-weight: 500;
+  color: #fdfdfd;
+}
+
+.podium-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.gold {
+  background: linear-gradient(135deg, #FFD700, #FFB800);
+  height: 220px;
+  z-index: 3;
+  margin-top: 0px;
+}
+
+.silver {
+  background: linear-gradient(135deg, #C0C0C0, #A9A9A9);
+  height: 180px;
+  margin-top: 40px;
+  z-index: 2;
+}
+
+.bronze {
+  background: linear-gradient(135deg, #CD7F32, #8B4513);
+  height: 170px;
+  margin-top: 50px;
+  z-index: 1;
+}
+
+.performers-table {
+  margin: 0 auto;
+  width: 92%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 14px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.performers-table th,
+.performers-table td {
+  padding: 10px 8px;
+  border: 1px solid #ccc;
+}
+
+.performers-table thead {
+  background-color: #f2f2f2;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.performers-table tr:hover {
+  background-color: #f8f8f8;
+  transition: background 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .podium {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .filters {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .podium-box {
+    width: 90%;
+    margin-top: 10px;
+  }
+
+  .performers-table {
+    font-size: 12px;
+  }
+}

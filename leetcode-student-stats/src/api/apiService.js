@@ -37,3 +37,62 @@ export const fetchStudentsByYearAndDivision = async (year, division) => {
     throw error;
   }
 };
+
+export const fetchTopPerformers = async ({ sortBy, year, division }) => {
+  try {
+    const token = localStorage.getItem("auth_token");
+    const params = new URLSearchParams();
+    if (sortBy) params.append("sortBy", sortBy);
+    if (year) params.append("class", year);
+    if (division) params.append("div", division);
+
+    const response = await axios.get(`${BASE_URL}/users/top-performers?${params.toString()}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching top performers:", error);
+    throw error;
+  }
+};
+
+export const fetchClassTotals = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/users/class-totals`);
+    return response.data; // [{ class: "SE", total: 1000 }, ...]
+  } catch (error) {
+    console.error("Error fetching class totals:", error);
+    throw error;
+  }
+};
+
+export const fetchWeeklyStats = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/users/weekly`);
+    return response.data; // [{ week: "This Week", total: 150 }, ...]
+  } catch (error) {
+    console.error("Error fetching weekly stats:", error);
+    throw error;
+  }
+};
+
+export const fetchClassDistribution = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/users/class-distribution`);
+    return response.data; // [{ class: "SE", count: 50 }, ...]
+  } catch (error) {
+    console.error("Error fetching class distribution:", error);
+    throw error;
+  }
+};
+
+export const fetchTopThisWeek = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/users/top-this-week`);
+    return response.data; // [{ name, class, div, thisWeek, totalSolved }, ...]
+  } catch (error) {
+    console.error("Error fetching top this week:", error);
+    throw error;
+  }
+};

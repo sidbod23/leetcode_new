@@ -90,4 +90,4 @@ app.use('/auth', authRoutes);
 // Optional: Import data (commented out because it's already called manually)
 const filePath='./data/user_data.xlsx'
 //importExcelData(filePath);
-updateLeetCodeStats();
+

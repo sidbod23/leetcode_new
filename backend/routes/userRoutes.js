@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/db'); // Assuming this is the path to your user model
 const authenticate = require('../middleware/authMiddleware');
+const { getTopPerformers } = require('../controllers/userController');
 
 
 // Endpoint 1: Get all users sorted by total questions solved (descending)
@@ -105,5 +106,85 @@ router.get('/class/TE/11', async (req, res) => {
         res.status(500).send('Error fetching users for class TE div 11.');
     }
 });
+
+
+router.get('/top-performers', authenticate, getTopPerformers);
+
+
+router.get('/class-totals', async (req, res) => {
+  try {
+    const result = await User.aggregate([
+      {
+        $group: {
+          _id: "$class",
+          total: { $sum: "$totalSolved" }
+        }
+      },
+      {
+        $project: {
+          class: "$_id",
+          total: 1,
+          _id: 0
+        }
+      }
+    ]);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+router.get('/weekly', async (req, res) => {
+  try {
+    const [result] = await User.aggregate([
+      {
+        $group: {
+          _id: null,
+          thisWeek: { $sum: "$thisWeek" },
+          lastWeek: { $sum: "$lastWeek" },
+          lastToLastWeek: { $sum: "$lastToLastWeek" }
+        }
+      }
+    ]);
+
+    const formatted = [
+      { week: "This Week", total: result?.thisWeek || 0 },
+      { week: "Last Week", total: result?.lastWeek || 0 },
+      { week: "2 Weeks Ago", total: result?.lastToLastWeek || 0 }
+    ];
+
+    res.json(formatted);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+router.get('/class-distribution', async (req, res) => {
+  try {
+    const result = await User.aggregate([
+      {
+        $group: {
+          _id: "$class",
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $project: {
+          class: "$_id",
+          count: 1,
+          _id: 0
+        }
+      }
+    ]);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
 
 module.exports = router;
