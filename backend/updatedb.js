@@ -11,7 +11,6 @@ async function updateLeetCodeStats() {
       }
 
       const today = new Date();
-      const startOfThisWeek = new Date(today.setDate(today.getDate() - today.getDay()));
       
       for (const user of users) {
           console.log(`Fetching LeetCode data for ${user.leetcodeId}...`);
@@ -50,7 +49,7 @@ async function updateLeetCodeStats() {
           }
 
           // Weekly calculation
-          if (!user.lastUpdated || user.lastUpdated < startOfThisWeek) {
+          if (today.getDay()==0) {
               // Update last weeks and current week values
               user.lastToLastWeek = user.lastWeek;
               user.lastWeek = user.thisWeek;
@@ -76,5 +75,6 @@ async function updateLeetCodeStats() {
       console.error('Error updating LeetCode stats:', error);
   }
 }
+
 
 module.exports = updateLeetCodeStats;
